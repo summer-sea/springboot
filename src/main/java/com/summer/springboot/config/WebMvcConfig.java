@@ -1,9 +1,13 @@
 package com.summer.springboot.config;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.text.SimpleDateFormat;
 
@@ -17,7 +21,7 @@ import java.text.SimpleDateFormat;
  */
 
 @Configuration
-public class WebMvcConfig {
+public class WebMvcConfig implements WebMvcConfigurer {
 
     /**
      * 通过json配置全局日期格式化
@@ -25,12 +29,37 @@ public class WebMvcConfig {
      * @return
      */
     @Bean
-    MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter(){
+    MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        ObjectMapper om =new ObjectMapper();
+        ObjectMapper om = new ObjectMapper();
         om.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
         converter.setObjectMapper(om);
         return converter;
     }
 
+    /**
+     * 在pom文件中取出springboot自带的json 加上fastjson依赖
+     * FastJson 配置使用fastjson必须要配置
+     *
+     * @return
+     */
+    @Bean
+    FastJsonHttpMessageConverter fastJsonHttpMessageConverter(){
+        FastJsonHttpMessageConverter converter1 =new FastJsonHttpMessageConverter();
+        FastJsonConfig fastJsonConfig =new FastJsonConfig();
+        fastJsonConfig.setDateFormat("yyyy-MM-dd");
+            return converter1;
+        }
+
+    /**
+     * 配置静态资源位置
+     *重写 源码中 的addResourceHandlers 方法
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry.addResourceHandler("/**").addResourceLocations("classpath:/summ/");
+
+    }
 }
+
+
