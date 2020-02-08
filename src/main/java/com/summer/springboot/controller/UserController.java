@@ -15,6 +15,7 @@ import java.util.List;
  * 使用json 要加上@ResponseBody 注解
  * 也可是使用组合注解@RestController 就是@Controller和@ResponseBody
  * 的组合
+ * 如果使用gson 要提前把json依赖排除掉 加上gson依赖
  */
 //@Controller
 @RestController
