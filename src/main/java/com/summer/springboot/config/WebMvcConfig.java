@@ -1,6 +1,4 @@
 package com.summer.springboot.config;
-import com.alibaba.fastjson.support.config.FastJsonConfig;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
@@ -43,6 +41,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
      *
      * @return
      */
+    /*
     @Bean
     FastJsonHttpMessageConverter fastJsonHttpMessageConverter(){
         FastJsonHttpMessageConverter converter1 =new FastJsonHttpMessageConverter();
@@ -50,16 +49,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
         fastJsonConfig.setDateFormat("yyyy-MM-dd");
             return converter1;
         }
+*/
 
     /**
      * 配置静态资源位置
      *重写 源码中 的addResourceHandlers 方法
+     * addResourceLocations参数是数组可以添加一个或多个路径
      */
-    @Override
+   /* @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    registry.addResourceHandler("/**").addResourceLocations("classpath:/summ/");
-
-    }
+    registry.addResourceHandler("/**").addResourceLocations("classpath:/summ/","classpath:/static/");
+    }*/
 }
 
 
