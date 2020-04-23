@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
  * 如果出现500的错误会直接调到500.html 的界面
  * 同事也支持模糊匹配规则 比如4xx.html 当发生404错误的时候会优先
  * 去找 404.html 如果找不到就会模糊匹配 4xx.html
- *
+ * 同样如果使用动态页面结果和静态页面类似
+ * 优先级为想同条件下动态页面大于静态页面
+ * 模糊匹配为优先级最低
  **/
 @RestController
 public class HelloController {
