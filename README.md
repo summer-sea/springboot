@@ -4,6 +4,7 @@
 
 * 通过@ImportResource注解加载xml文件
 
+* 注意@ImportResource并不是springboot的二十spring本身的注解
 ```java
 package com.summer.springboot;
 
